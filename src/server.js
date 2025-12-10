@@ -12,10 +12,10 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(helmet()); // Security headers
-app.use(cors()); // Enable CORS
-app.use(morgan('dev')); // Logging
-app.use(express.json()); // Body parser
+app.use(helmet()); 
+app.use(cors()); 
+app.use(morgan('dev')); 
+app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 
 // Route di test
