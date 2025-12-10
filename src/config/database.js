@@ -68,4 +68,4 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connect
+module.exports = connectDB
