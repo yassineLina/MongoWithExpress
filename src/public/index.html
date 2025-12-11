@@ -1,0 +1,142 @@
+<!-- src/public/index.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Utenti - MongoDB + Express</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-database"></i>
+                <h1>User Dashboard</h1>
+            </div>
+            <div class="subtitle">MongoDB + Express + Node.js</div>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="stats-container" id="statsContainer">
+            <div class="stat-card loading">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-info">
+                    <div class="stat-value">--</div>
+                    <div class="stat-label">Utenti Totali</div>
+                </div>
+            </div>
+            <div class="stat-card loading">
+                <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="stat-info">
+                    <div class="stat-value">--</div>
+                    <div class="stat-label">Età Media</div>
+                </div>
+            </div>
+            <div class="stat-card loading">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info">
+                    <div class="stat-value">--</div>
+                    <div class="stat-label">Utenti Attivi</div>
+                </div>
+            </div>
+            <div class="stat-card loading">
+                <div class="stat-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="stat-info">
+                    <div class="stat-value">--</div>
+                    <div class="stat-label">Città</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3><i class="fas fa-chart-pie"></i> Distribuzione per Città</h3>
+                <canvas id="cityChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3><i class="fas fa-chart-bar"></i> Distribuzione Età</h3>
+                <canvas id="ageChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="table-container">
+            <div class="table-header">
+                <h2><i class="fas fa-table"></i> Elenco Utenti</h2>
+                <div class="controls">
+                    <button id="refreshBtn" class="btn btn-primary">
+                        <i class="fas fa-sync-alt"></i> Aggiorna
+                    </button>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Cerca utenti...">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="table-wrapper">
+                <table id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Età</th>
+                            <th>Città</th>
+                            <th>Stato</th>
+                            <th>Data Registrazione</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <!-- Dati verranno inseriti qui via JavaScript -->
+                        <tr class="loading-row">
+                            <td colspan="7">
+                                <div class="loading-spinner">
+                                    <i class="fas fa-spinner fa-spin"></i> Caricamento dati...
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-footer">
+                <div class="pagination">
+                    <button id="prevBtn" class="btn btn-outline" disabled>
+                        <i class="fas fa-chevron-left"></i> Precedente
+                    </button>
+                    <span id="pageInfo">Pagina 1</span>
+                    <button id="nextBtn" class="btn btn-outline">
+                        Successivo <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="table-info" id="tableInfo">
+                    Mostrando 0 di 0 utenti
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>
+                <i class="fas fa-code"></i> Sviluppato con Node.js, Express e MongoDB Atlas
+                | <span id="lastUpdate">Ultimo aggiornamento: --</span>
+            </p>
+            <p class="server-status">
+                <i class="fas fa-server"></i> Stato server: 
+                <span class="status-indicator" id="statusIndicator">
+                    <span class="status-dot"></span> Controllo...
+                </span>
+            </p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
