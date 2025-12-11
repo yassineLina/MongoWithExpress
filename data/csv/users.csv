@@ -1,0 +1,6 @@
+name,email,age,city,isActive,createdAt
+Mario Rossi,mario@example.com,30,Roma,true,2024-01-15
+Laura Bianchi,laura@example.com,28,Milano,true,2024-01-16
+Giuseppe Verdi,giuseppe@example.com,35,Napoli,false,2024-01-17
+Anna Neri,anna@example.com,26,Torino,true,2024-01-18
+Luigi Bianchi,luigi@example.com,40,Firenze,true,2024-01-19
