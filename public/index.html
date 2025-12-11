@@ -1,139 +1,43 @@
-<!-- src/public/index.html -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Utenti - MongoDB + Express</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Dashboard Utenti - Demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+    <style>
+        /* Stili semplificati per GitHub Pages */
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .dashboard { background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); padding: 2rem; margin-top: 2rem; }
+        .stat-card { border-left: 4px solid #667eea; padding: 1.5rem; margin-bottom: 1rem; background: #f8f9fa; border-radius: 10px; }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="logo">
-                <i class="fas fa-database"></i>
-                <h1>User Dashboard</h1>
-            </div>
-        </header>
-
-        <!-- Stats Cards -->
-        <div class="stats-container" id="statsContainer">
-            <div class="stat-card loading">
-                <div class="stat-icon"><i class="fas fa-users"></i></div>
-                <div class="stat-info">
-                    <div class="stat-value">--</div>
-                    <div class="stat-label">Utenti Totali</div>
-                </div>
-            </div>
-            <div class="stat-card loading">
-                <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="stat-info">
-                    <div class="stat-value">--</div>
-                    <div class="stat-label">Età Media</div>
-                </div>
-            </div>
-            <div class="stat-card loading">
-                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
-                <div class="stat-info">
-                    <div class="stat-value">--</div>
-                    <div class="stat-label">Utenti Attivi</div>
-                </div>
-            </div>
-            <div class="stat-card loading">
-                <div class="stat-icon"><i class="fas fa-map-marker-alt"></i></div>
-                <div class="stat-info">
-                    <div class="stat-value">--</div>
-                    <div class="stat-label">Città</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Charts Section -->
-        <div class="charts-container">
-            <div class="chart-card">
-                <h3><i class="fas fa-chart-pie"></i> Distribuzione per Città</h3>
-                <canvas id="cityChart"></canvas>
-            </div>
-            <div class="chart-card">
-                <h3><i class="fas fa-chart-bar"></i> Distribuzione Età</h3>
-                <canvas id="ageChart"></canvas>
-            </div>
-        </div>
-
-        <!-- Users Table -->
-        <div class="table-container">
-            <div class="table-header">
-                <h2><i class="fas fa-table"></i> Elenco Utenti</h2>
-                <div class="controls">
-                    <button id="refreshBtn" class="btn btn-primary">
-                        <i class="fas fa-sync-alt"></i> Aggiorna
-                    </button>
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Cerca utenti...">
-                    </div>
-                </div>
+        <div class="dashboard">
+            <h1 class="text-center mb-4">
+                <i class="bi bi-database"></i> Dashboard Utenti Demo
+            </h1>
+            
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle"></i> 
+                Per la versione completa con backend Node.js e MongoDB, visita il repository.
             </div>
             
-            <div class="table-wrapper">
-                <table id="usersTable">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Età</th>
-                            <th>Città</th>
-                            <th>Stato</th>
-                            <th>Data Registrazione</th>
-                        </tr>
-                    </thead>
-                    <tbody id="usersTableBody">
-                        <!-- Dati verranno inseriti qui via JavaScript -->
-                        <tr class="loading-row">
-                            <td colspan="7">
-                                <div class="loading-spinner">
-                                    <i class="fas fa-spinner fa-spin"></i> Caricamento dati...
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="row mt-4" id="stats">
+                <!-- Dati verranno popolati da app.js -->
             </div>
             
-            <div class="table-footer">
-                <div class="pagination">
-                    <button id="prevBtn" class="btn btn-outline" disabled>
-                        <i class="fas fa-chevron-left"></i> Precedente
-                    </button>
-                    <span id="pageInfo">Pagina 1</span>
-                    <button id="nextBtn" class="btn btn-outline">
-                        Successivo <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-                <div class="table-info" id="tableInfo">
-                    Mostrando 0 di 0 utenti
-                </div>
+            <div class="mt-4">
+                <a href="https://github.com/tuonome/TRAINING-PROJECT" class="btn btn-primary">
+                    <i class="bi bi-github"></i> Vedi Codice Completo
+                </a>
             </div>
         </div>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p>
-           
-        </footer>
     </div>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
