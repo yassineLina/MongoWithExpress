@@ -401,7 +401,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Servi file statici dalla cartella 'public'
+app.use(express.static(path.join(__dirname, 'src/public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // API Routes (se le hai)
@@ -410,7 +410,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Route per la pagina web
 app.get('/web', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  const publicPath = path.join(__dirname, 'public', 'index.html');
+  const srcPublicPath = path.join(__dirname, 'src/public', 'index.html');
+  
+  if (require('fs').existsSync(publicPath)) {
+    res.sendFile(publicPath);
+  } else if (require('fs').existsSync(srcPublicPath)) {
+    res.sendFile(srcPublicPath);
+  } else {
+    res.status(404).send('File non trovato');
+  }
 });
 
 // API per ottenere utenti (nuova)
@@ -479,7 +488,7 @@ app.get('/', (req, res) => {
   });
 });
 
-// Avvia server
+// Avvia servergit 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log('\n' + '='.repeat(50));
